@@ -1,0 +1,122 @@
+/**
+ * Configure
+ * =========
+ */
+
+ $purple: #2B3499; // 1D267D;
+ $primary: $purple;
+ $red: #FF407D;
+ $teal: #1AACAC;
+
+ @use "~/node_modules/bulma/sass/utilities" with (
+   $family-primary: '"Inter var", "Inter", sans-serif',
+   $primary: #38419D, //2B3499,
+   $link: #2229d2, //$teal
+   $info: #22b7f6,
+   // $success: #65B741, //1AACAC,
+   // $pre-background: #404654, // doesn't work??
+   $size-1: 2.5rem,
+   $size-2: 2rem,
+   $size-3: 1.5rem,
+   $size-4: 1.25rem,
+   $size-5: 1rem,
+   $size-6: 0.9rem,
+   $size-7: 0.8rem
+ );
+
+ /**
+  * Bulma Sass
+  * ==========
+  */
+
+ // Base
+ @forward "~/node_modules/bulma/sass/base";
+
+ // Components
+ // @forward "~/node_modules/bulma/sass/components/breadcrumb";
+ @forward "~/node_modules/bulma/sass/components/card";
+ // @forward "~/node_modules/bulma/sass/components/dropdown";
+ // @forward "~/node_modules/bulma/sass/components/menu";
+ @forward "~/node_modules/bulma/sass/components/message";
+ // @forward "~/node_modules/bulma/sass/components/modal";
+ @forward "~/node_modules/bulma/sass/components/navbar";
+ // @forward "~/node_modules/bulma/sass/components/pagination";
+ // @forward "~/node_modules/bulma/sass/components/panel";
+ @forward "~/node_modules/bulma/sass/components/tabs";
+
+ // Elements
+ @forward "~/node_modules/bulma/sass/elements/block";
+ @forward "~/node_modules/bulma/sass/elements/box";
+ @forward "~/node_modules/bulma/sass/elements/button";
+ @forward "~/node_modules/bulma/sass/elements/content";
+ @forward "~/node_modules/bulma/sass/elements/delete";
+ @forward "~/node_modules/bulma/sass/elements/icon";
+ @forward "~/node_modules/bulma/sass/elements/image";
+ @forward "~/node_modules/bulma/sass/elements/loader";
+ @forward "~/node_modules/bulma/sass/elements/notification";
+ // @forward "~/node_modules/bulma/sass/elements/progress";
+ @forward "~/node_modules/bulma/sass/elements/table";
+ @forward "~/node_modules/bulma/sass/elements/tag";
+ @forward "~/node_modules/bulma/sass/elements/title";
+
+ // Form
+ // @forward "~/node_modules/bulma/sass/form/checkbox-radio";
+ // @forward "~/node_modules/bulma/sass/form/file";
+ // @forward "~/node_modules/bulma/sass/form/input-textarea";
+ // @forward "~/node_modules/bulma/sass/form/select";
+ // @forward "~/node_modules/bulma/sass/form/shared";
+ // @forward "~/node_modules/bulma/sass/form/tools";
+
+
+ // Grid
+ // @forward "~/node_modules/bulma/sass/grid/columns-v2";
+ @forward "~/node_modules/bulma/sass/grid/columns";
+ @forward "~/node_modules/bulma/sass/grid/grid";
+
+
+ // All helpers, layout
+ @forward "~/node_modules/bulma/sass/helpers";
+ @forward "~/node_modules/bulma/sass/layout";
+
+ // Import the themes so that all CSS variables have a value
+ @forward "~/node_modules/bulma/sass/themes";
+
+
+ /**
+  * Bulma customizations
+  * ====================
+  */
+
+ :root {
+   // --bulma-pre-background: #1f293b; //#292D3E;
+   --bulma-pre-font-size: 1em;
+   // --bulma-body-font-size: 14px;
+   // --teal: #1AACAC;
+   // --bulma-link-text: #00a4ba;
+
+   --bulma-code: #333;
+   --bulma-code-background: #e0e9ee; // #eaeaea;
+   --bulma-code-size: .95em; // bit larger
+   --bulma-pre-background: #213041;
+   --bulma-pre: #ccc;
+   // --bulma-pre-font-size: 15px;
+ }
+
+ html {
+   background-color: var(--bulma-scheme-main-ter-l);
+ }
+
+ .tag {
+   vertical-align: middle;
+   font-weight: normal;
+ }
+
+ /**
+  * Dark mode customizations
+  * ========================
+  */
+ // @media (prefers-color-scheme: dark) {
+ //   :root {
+ //     --bulma-body-color: #fff;
+ //   }
+ // }
