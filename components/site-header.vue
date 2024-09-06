@@ -1,6 +1,6 @@
 <script></script>
 <template>
-  <nav class="navbar is-dark mb-4" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand is-size-4 has-text-weight-bold">
         <a class="navbar-item" href="https://bulma.io">

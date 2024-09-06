@@ -7,24 +7,12 @@
 
   // console.log(checklist.value.items)
   const categories = {}
-  const subcategories = []
-  const items = {}
-
+  const subcategories = {}
   const list = {}
 
   checklist.value.items.forEach(function(item) {
     const catKey = toLowerDashed(item.category)
     const subcatKey = toLowerDashed(item.subcategory)
-
-    // Add to categories
-    // if (!categories.hasOwnProperty(categoryKey)) {
-    //   categories[categoryKey] = item.category
-    // }
-
-
-    // if (!subcategories.hasOwnProperty(subcategoryKey)) {
-    //   subcategories[subcategoryKey] = item.subcategory
-    // }
 
     if (!hasCategory (catKey)) {
       list[catKey] = {}
@@ -37,19 +25,11 @@
     }
 
     list[catKey][subcatKey].push(item)
-
-    // Add to items
-    if (!items.hasOwnProperty(catKey)) {
-      items[catKey] = []
-    }
-
-
-    items[catKey].push(item)
   })
 
-  console.log('---')
-  console.log(list)
-  console.log('---')
+  // console.log('---')
+  // console.log(list)
+  // console.log('---')
 
   function hasCategory (key) {
     return list.hasOwnProperty(key)
@@ -58,58 +38,55 @@
   function hasSubcategory (catKey, subcatKey) {
     return list.hasOwnProperty(catKey) && list[catKey].hasOwnProperty(subcatKey)
   }
-
-  function anchorLink (id) {
-    return `#${id}`
-  }
-
-  // const detailsEls = document.querySelectorAll('details')
-  // detailsEls.forEach(el => { el.open = true })
-  // console.log(detailsEls)
-  const detailsEls = ref([])
 </script>
 
 <template>
   <div>
-    <h1 class="is-size-2 has-text-weight-bold">Landing Zone Review</h1>
-<!-- <pre><code>{{ list }}</code></pre> -->
+  <SiteHero/>
+  <div class="container">
     <div class="columns">
-      <div class="column is-one-fifth">
-        <nav class="category-nav">
+      <div class="column is-one-quarter has-category-nav">
+        <nav class="category-nav pt-5">
           <ul>
             <li v-for="(cat, catKey) in list">
-              <NuxtLink :to="anchorLink(catKey)" class="has-text-weight-bold">{{ categories[catKey] }}</NuxtLink>
-              <!-- <ul>
-                <li v-for="(subcat, subcatKey) in cat" class="ml-4">
-                  {{ subcatKey }}
+              <NuxtLink :to="anchorLink(catKey)" class="has-text-weight-semibold">{{ categories[catKey] }}</NuxtLink>
+              <ul class="mt-1 mb-4">
+                <li v-for="(subcat, subcatKey) in cat" class="ml-4 is-size-6">
+                  <NuxtLink :to="anchorLink(subcatKey)">{{ subcategories[subcatKey] }}</NuxtLink>
                 </li>
-              </ul> -->
+              </ul>
             </li>
           </ul>
         </nav>
       </div>
-      <div class="column">
-        <section v-for="category in items" ref="detailsEls">
-        <details>
-          <summary>
-            <h1 class="is-size-3 has-text-weight-bold">
-              {{ category[0].category }}
-            </h1>
-          </summary>
-          <article v-for="item in category">
-            <p>{{ item.id }}</p>
-             <h1 class="is-size-4">
-               <NuxtLink :to="item.link" external>{{ item.text }}</NuxtLink>
-             </h1>
-            <p>WAF: {{ item.waf }}</p>
-            <NuxtLink :to="item.training" external>Learn</NuxtLink>
-            <hr>
-          </article>
-        </details>
+      <div class="column pt-6">
+        <section v-for="(category, catKey) in list" ref="detailsEls">
+          <h1 class="is-size-2 has-text-weight-bold" :id="catKey">
+            {{ categories[catKey] }}
+          </h1>
+          <section v-for="(subcategory, subcatKey) in category">
+            <h2 class="is-size-3 has-text-weight-bold" :id="subcatKey">
+              {{ subcategories[subcatKey] }}
+            </h2>
+            <article v-for="item in subcategory" class="checklist-item has-background-light my-4 py-5 px-4">
+              <p class="is-size-6 has-text-grey">
+                {{ item.id }} | {{ item.subcategory }} | Pillar: {{ item.waf }}
+              </p>
+              <h1 class="is-size-4 has-text-weight-semibold mb-4">
+                {{ item.text }}
+              </h1>
+
+              <div class="buttons">
+                <NuxtLink :to="item.link" target="_blank" class="button is-small is-primary">Documentation</NuxtLink>
+                <NuxtLink :to="item.training" target="_blank" class="button is-small is-info">MS Learn</NuxtLink>
+              </div>
+            </article>
+          </section>
         <hr>
       </section>
       </div>
     </div>
+  </div>
 
 
 
@@ -126,20 +103,6 @@
   "link": "https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/azure-billing-enterprise-agreement#design-considerations",
   "training": "https://learn.microsoft.com/azure/devtest/offer/how-to-manage-monitor-devtest"
 }, -->
-<!--
-    <hr>
-    <div>
-      <details>
-        <summary>
-          <h1 class="is-size-4 has-text-weight-semibold">
-            Raw Data
-          </h1>
-        </summary>
-        <pre><code>
-          {{ checklist }}
-        </code></pre>
-      </details>
-    </div> -->
   </div>
 
 </template>
@@ -156,14 +119,29 @@ details {
     }
   }
 }
+// .has-category-nav {
+//   overflow: scroll;
+// }
 
 .category-nav {
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+  overflow: auto;
+  border-right: 1px solid #ddd;
+
   li {
-    // list-style-type: disc;
     li {
       list-style-type: circle;
     }
   }
+
+  a:not(.button):link, a:not(.button):visited {
+    color: var(--bulma-text-color);
+  }
 }
 
+a:hover, a:active {
+  text-decoration: underline;
+}
 </style>
