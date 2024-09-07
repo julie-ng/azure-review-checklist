@@ -44,7 +44,7 @@
   <div>
   <SiteHero/>
   <div class="container">
-    <div class="columns">
+    <div class="columns is-gapless">
       <div class="column is-one-quarter has-category-nav">
         <nav class="category-nav pt-5">
           <ul>
@@ -60,29 +60,35 @@
         </nav>
       </div>
       <div class="column pt-6">
-        <section v-for="(category, catKey) in list" ref="detailsEls">
-          <h1 class="is-size-2 has-text-weight-bold" :id="catKey">
-            {{ categories[catKey] }}
-          </h1>
-          <section v-for="(subcategory, subcatKey) in category">
-            <h2 class="is-size-3 has-text-weight-bold" :id="subcatKey">
+  <section v-for="(category, catKey) in list" ref="detailsEls">
+          <div class="category-header py-4 px-6 mt-3 mb-4 has-text-primary is-sticky-heading">
+            <h1 class="is-size-2 py-3 has-background-primary-90 has-text-weight-bold" :id="catKey">
+              {{ categories[catKey] }}
+            </h1>
+          </div>
+          <section v-for="(subcategory, subcatKey) in category" class="px-6">
+            <h2 class="is-size-3 has-text-weight-bold has-scroll-margin-top-100" :id="subcatKey">
               {{ subcategories[subcatKey] }}
             </h2>
-            <article v-for="item in subcategory" class="checklist-item has-background-light my-4 py-5 px-4">
-              <p class="is-size-6 has-text-grey">
-                {{ item.id }} | {{ item.subcategory }} | Pillar: {{ item.waf }}
+            <article v-for="item in subcategory" class="checklist-item box has-background-light2 my-5 py-5 px-5">
+              <p class="is-size-6 has-text-grey-light">
+                <span class="has-text-primary-333">{{ item.id }}</span>
+                &nbsp;<span class="has-text-grey-lighter">|</span>&nbsp;
+                {{ item.subcategory }}
+                &nbsp;<span class="has-text-grey-lighter">|</span>&nbsp;
+                Pillar: {{ item.waf }}
               </p>
-              <h1 class="is-size-4 has-text-weight-semibold mb-4">
+              <h1 class="is-size-4 has-text-weight-normal mb-4">
                 {{ item.text }}
               </h1>
 
               <div class="buttons">
-                <NuxtLink :to="item.link" target="_blank" class="button is-small is-primary">Documentation</NuxtLink>
-                <NuxtLink :to="item.training" target="_blank" class="button is-small is-info">MS Learn</NuxtLink>
+                <NuxtLink :to="item.link" target="_blank" class="button is-small is-light is-primary">Documentation</NuxtLink>
+                <NuxtLink :to="item.training" target="_blank" class="button is-small is-light is-info">MS Learn</NuxtLink>
               </div>
             </article>
           </section>
-        <hr>
+
       </section>
       </div>
     </div>
@@ -143,5 +149,23 @@ details {
 
 a:hover, a:active {
   text-decoration: underline;
+}
+
+.is-sticky-heading {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.category-header {
+  background: rgba(255,255,255,0.95);
+  h1 {
+    border-left: 8px solid var(--bulma-primary);
+    padding-left: 20px;
+  }
+}
+
+.has-scroll-margin-top-100 {
+  scroll-margin-top: 100px;
 }
 </style>
