@@ -46,7 +46,8 @@
 
 <template>
   <div>
-  <SiteHero/>
+    <SiteHero title="Landing Zone Review" />
+
   <div class="container">
     <div class="columns is-gapless">
       <div class="column is-one-quarter has-category-nav">
