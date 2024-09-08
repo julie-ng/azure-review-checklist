@@ -72,6 +72,18 @@ export const useChecklistStore = defineStore('ChecklistStore', () => {
   }
 
 
+  function getCategoryTitle (key) {
+    return (categories.value.hasOwnProperty(key))
+    ? categories.value[key]
+    : 'Invalid Subcategory'
+  }
+
+  function getSubcategoryTitle (key) {
+    return (subcategories.value.hasOwnProperty(key))
+      ? subcategories.value[key]
+      : 'Invalid Subcategory'
+  }
+
    /**
    * Reset Local Storage
    */
@@ -120,6 +132,8 @@ export const useChecklistStore = defineStore('ChecklistStore', () => {
     versionShort: skipHydrate(versionShort),
     init,
     isReady,
+    getCategoryTitle,
+    getSubcategoryTitle,
     $reset
   }
 })
