@@ -119,6 +119,10 @@
 
 <style lang="scss">
 
+html {
+  scroll-behavior: smooth;
+}
+
 details {
   summary {
     cursor: pointer;
