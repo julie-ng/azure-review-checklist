@@ -47,23 +47,11 @@
 <template>
   <div>
     <SiteHero title="Landing Zone Review" />
-
-  <div class="container">
-    <div class="columns is-gapless">
-      <div class="column is-one-quarter has-category-nav">
-        <nav class="category-nav pt-5">
-          <ul>
-            <li v-for="(cat, catKey) in list">
-              <NuxtLink :to="anchorLink(catKey)" class="has-text-weight-semibold">{{ categories[catKey] }}</NuxtLink>
-              <ul class="mt-1 mb-4">
-                <li v-for="(subcat, subcatKey) in cat" class="ml-4 is-size-6">
-                  <NuxtLink :to="anchorLink(subcatKey)">{{ subcategories[subcatKey] }}</NuxtLink>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </div>
+    <div class="container">
+      <div class="columns is-gapless">
+        <div class="column is-2">
+          <ReviewNavigation :items="list" :categories="categories" :subcategories="subcategories" />
+        </div>
       <div class="column pt-6">
   <section v-for="(category, catKey) in list" ref="detailsEls">
           <div class="category-header py-4 px-6 mt-3 mb-4 has-text-primary is-sticky-heading">
