@@ -53,20 +53,15 @@ export const useChecklistStore = defineStore('ChecklistStore', () => {
       const subcatKey = toLowerDashed(item.subcategory)
 
       if (!_hasCategory (catKey)) {
-        console.log(`🔴 missing ${catKey}`);
         list.value[catKey] = {}
         categories.value[catKey] = item.category
-      } else {
-        console.log(`🟢 got ${catKey}`);
       }
 
       if (!_hasSubcategory (catKey, subcatKey)) {
-        console.log(`🔴 missing ${subcatKey} in ${catKey}`);
         list.value[catKey][subcatKey] = []
         subcategories.value[subcatKey] = item.subcategory
-      } else {
-        console.log(`🟢 got ${subcatKey} in ${catKey}`);
       }
+
       list.value[catKey][subcatKey].push(item)
     })
   }
