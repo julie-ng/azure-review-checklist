@@ -50,7 +50,7 @@
           <ReviewNavigation :items="list" :categories="categories" :subcategories="subcategories" />
         </div>
       <div class="column pt-6">
-  <section v-for="(category, catKey) in list" ref="detailsEls">
+        <section v-for="(category, catKey) in list" ref="detailsEls">
           <div class="category-header py-4 px-6 mt-3 mb-4 has-text-primary is-sticky-heading">
             <h1 class="is-size-2 py-3 has-background-primary-90 has-text-weight-bold" :id="catKey">
               {{ categories[catKey] }}
@@ -100,19 +100,11 @@
     </div>
   </div>
 
-
-
-
-
   </div>
-
 </template>
 
 <style lang="scss">
 
-html {
-  scroll-behavior: smooth;
-}
 
 details {
   summary {
@@ -128,34 +120,17 @@ details {
 
 
 
-.is-sticky-heading {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.category-header {
-  background: rgba(255,255,255,0.95);
-  h1 {
-    border-left: 8px solid var(--bulma-primary);
-    padding-left: 20px;
-  }
-}
-
-.has-scroll-margin-top-100 {
-  scroll-margin-top: 100px;
-}
-
-// [data-severity="High"] {
-//   border-right: 5px solid red;
+// .is-sticky-heading {
+//   position: sticky;
+//   top: 0;
+//   z-index: 1000;
 // }
 
-// [data-severity="Medium"] {
-//   border-right: 5px solid orange;
+
+// .has-scroll-margin-top-100 {
+//   scroll-margin-top: 100px;
 // }
 
-// [data-severity="Low"] {
-//   border-right: 5px solid yellow;
-// }
+
 
 </style>
