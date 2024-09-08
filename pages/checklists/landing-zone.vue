@@ -123,31 +123,9 @@ details {
     }
   }
 }
-// .has-category-nav {
-//   overflow: scroll;
-// }
 
-.category-nav {
-  position: sticky;
-  top: 0;
-  max-height: 100vh;
-  overflow: auto;
-  border-right: 1px solid #ddd;
 
-  li {
-    li {
-      list-style-type: circle;
-    }
-  }
 
-  a:not(.button):link, a:not(.button):visited {
-    color: var(--bulma-text-color);
-  }
-}
-
-a:hover, a:active {
-  text-decoration: underline;
-}
 
 .is-sticky-heading {
   position: sticky;
