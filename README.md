@@ -1,75 +1,30 @@
-# Nuxt 3 Minimal Starter
+# Azure Review Checklist - Nuxt App
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Web UI for [github.com/Azure/review-checklists](https://github.com/Azure/review-checklists)
 
-## Setup
-
-Make sure to install the dependencies:
+## Use
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+Open in a browser: [localhost:3000/checklists/landing-zone](http://localhost:3000/checklists/landing-zone) 
 
-Build the application for production:
+## Data Model
 
-```bash
-# npm
-npm run build
+Example item from checklist repository's [`./checklists/alz_checklist.en.json`](https://github.com/Azure/review-checklists/tree/main/checklists)
 
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+```json
+{
+  "category": "Azure Billing and Microsoft Entra ID Tenants",
+  "subcategory": "Enterprise Agreement",
+  "text": "Use of Enterprise Dev/Test Subscriptions to reduce costs for non-production workloads.",
+  "waf": "Cost",
+  "guid": "5cf9f485-2784-49b3-9824-75d9b8bdb57b",
+  "id": "A03.05",
+  "severity": "Low",
+  "link": "https://learn.microsoft.com/azure/cloud-adoption-framework/ready/landing-zone/design-area/azure-billing-enterprise-agreement#design-considerations",
+  "training": "https://learn.microsoft.com/azure/devtest/offer/how-to-manage-monitor-devtest"
+}
 ```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
