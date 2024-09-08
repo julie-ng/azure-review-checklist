@@ -1,4 +1,8 @@
 <script setup>
+  useHead({
+    title: 'Landing Zone Review'
+  })
+
   const { data: checklist, status, error, refresh, clear } = await useAsyncData(
     'landing-zone-checklist',
     () => $fetch('/api/data/checklist/landing-zone')
