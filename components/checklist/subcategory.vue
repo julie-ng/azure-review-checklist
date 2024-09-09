@@ -38,7 +38,7 @@
 <style lang="scss" scoped>
   section {
     background: #fff;
-    border-radius: 6px;
+    // border-radius: 6px;
     box-shadow: 0px 0px 6px rgba(0,0,0,0.05);
     // border: 1px solid red;
   }

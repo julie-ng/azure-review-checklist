@@ -39,11 +39,11 @@
         </div>
       </div>
 
-      <hr>
+      <!-- <hr>
       <details>
         <summary>Raw JSON</summary>
         <pre><code>{{ list }}</code></pre>
-      </details>
+      </details> -->
 
     </div>
   </ClientOnly>

@@ -53,7 +53,7 @@
     // background-color: #f1f1f1;
     border-color: #dedede;
     padding: 4px 6px;
-    border-radius: 4px;
+    // border-radius: 4px;
     font-size: 12px;
     color: #444;
 
