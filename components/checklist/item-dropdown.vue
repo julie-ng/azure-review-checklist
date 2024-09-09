@@ -4,7 +4,7 @@
 
   const statuses = {
     'not-set': {
-      text: 'Not set',
+      text: '-',
       style: ''
     },
     fulfilled: {
@@ -51,9 +51,11 @@
   select {
     width: 100%;
     // background-color: #f1f1f1;
-    border-color: #ccc;
-    padding: 6px 6px;
+    border-color: #dedede;
+    padding: 4px 6px;
     border-radius: 4px;
+    font-size: 12px;
+    color: #444;
 
     // &:focus {
     //   // outline: 2px dashed red;  /* replace the focus outline removed with 'outline: none' */

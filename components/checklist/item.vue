@@ -17,31 +17,30 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="columns table-row ">
-    <div class="column is-1 pt-5 pb-3">
-      <p class="is-size-6">
+  <div class="table-row py-2 is-size-6">
+    <div class="columns mx-1">
+      <div class="column is-1">
         {{ props.id }}
-      </p>
-    </div>
-    <div class="column is-1 pt-5 pb-3" style="width: 10%">
-      <p class="is-size-6">
+      </div>
+      <div class="column is-1" style="width: 10%">
         {{ props.pillar }}
-      </p>
-    </div>
-    <div class="column is-8 pt-5 pb-3">
-      <p class="is-size-5">
+      </div>
+      <div class="column is-7">
         {{ props.text }}
-      </p>
-    </div>
-    <div class="column pt-5 pb-3 is-2">
-      <ChecklistItemDropdown/>
+      </div>
+      <div class="column is-2">
+        <ChecklistItemDropdown/>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
 .table-row {
-  border-bottom: 1px solid var(--bulma-grey-lighter);
+  border-top: 1px solid #DEE6EA; //var(--bulma-grey-lighter);
+  // &:last-child {
+  //   border-bottom: none;
+  // }
 
   // .column {
   //   border: 1px solid red;

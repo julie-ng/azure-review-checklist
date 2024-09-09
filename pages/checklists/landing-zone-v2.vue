@@ -24,7 +24,6 @@
         </div>
         <div class="column">
           <div class="p-5">
-
             <section v-for="(category, catKey) in list" :key="catKey">
               <h1 class="is-size-3 py-3 has-text-weight-bold">{{ checklistStore.getCategoryTitle(catKey) }}</h1>
                 <ChecklistSubcategory v-for="(subcategory, subcatKey) in category"
@@ -47,3 +46,10 @@
   </ClientOnly>
   </div>
 </template>
+
+<style lang="scss">
+  body {
+    // background: #f4f8fb;
+    background: #fbfbfb;
+  }
+</style>
