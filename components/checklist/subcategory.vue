@@ -42,4 +42,8 @@
     box-shadow: 0px 0px 6px rgba(0,0,0,0.05);
     // border: 1px solid red;
   }
+
+  h1 {
+    scroll-margin-top: 160px;
+  }
 </style>

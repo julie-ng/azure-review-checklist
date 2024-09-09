@@ -62,4 +62,13 @@
     max-height: 90vh; // because nav is longer than viewport
     overflow: scroll;
   }
+
+  .has-sticky-category-heading {
+    position: sticky;
+    top: 98px;
+    // background-color: black;
+    // color: white;
+
+    border-left: 6px solid var(--bulma-primary);
+  }
 </style>

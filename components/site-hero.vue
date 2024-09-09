@@ -40,7 +40,7 @@ section {
   position: sticky;
   top: 0;
   max-height: 100vh;
-  z-index: 1000;
+  z-index: 100;
   // overflow: scroll;
 }
 </style>
