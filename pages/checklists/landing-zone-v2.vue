@@ -27,7 +27,7 @@
 
             <section v-for="(category, catKey) in list" :key="catKey">
               <h1 class="is-size-3 py-3 has-text-weight-bold">{{ checklistStore.getCategoryTitle(catKey) }}</h1>
-              <!-- <pre><code>{{ category }}</code></pre> -->
+
               <section v-for="(subcategory, subcatKey) in category" :key="subcatKey">
                 <h1 class="is-size-4 py-3 has-text-weight-bold">{{ checklistStore.getSubcategoryTitle(subcatKey) }}</h1>
                 <article v-for="item in subcategory"
@@ -44,15 +44,6 @@
           </div>
         </div>
       </div>
-      <!-- <h1 class="is-size-2 has-text-weight-bold">Landing Zone Review v2</h1> -->
-      <!-- <hr> -->
-<!--
-      <h1 class="is-size-3 has-text-weight-bold">Categories</h1>
-      <pre><code>{{ categories }}</code></pre>
-      <hr>
-
-
-      <h1 class="is-size-3 has-text-weight-bold">List</h1> -->
 
       <hr>
       <details>
@@ -64,4 +55,3 @@
   </ClientOnly>
   </div>
 </template>
-
