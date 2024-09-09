@@ -12,6 +12,11 @@ const props = defineProps({
     type: String,
     required: false,
     default: 'is-primary'
+  },
+  sticky: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
@@ -29,3 +34,13 @@ const heroClasses = () => `hero is-small ${props.style}`
     </div>
   </section>
 </template>
+
+<style lang="scss" scoped>
+section {
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+  z-index: 1000;
+  // overflow: scroll;
+}
+</style>

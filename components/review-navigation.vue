@@ -16,34 +16,25 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="is-sticky">
-    <nav class="mt-4">
-      <ul class="categories mr-4">
-        <li v-for="(cat, catKey) in props.items">
-          <NuxtLink :to="anchorLink(catKey)" class="has-text-weight-semibold is-size-7">{{ props.categories[catKey] }}</NuxtLink>
-          <ul class="subcategories mt-1 mb-4">
-            <li v-for="(subcat, subcatKey) in cat" class="ml-4 is-size-7">
-              <NuxtLink :to="anchorLink(subcatKey)">{{ props.subcategories[subcatKey] }}</NuxtLink>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-    <!-- <pre><code>{{ props.items }}</code></pre> -->
-  </div>
+  <nav class="mt-4">
+    <ul class="categories mr-4">
+      <li v-for="(cat, catKey) in props.items">
+        <NuxtLink :to="anchorLink(catKey)" class="has-text-weight-semibold is-size-7">{{ props.categories[catKey] }}</NuxtLink>
+        <ul class="subcategories mt-1 mb-4">
+          <li v-for="(subcat, subcatKey) in cat" class="ml-4 is-size-7">
+            <NuxtLink :to="anchorLink(subcatKey)">{{ props.subcategories[subcatKey] }}</NuxtLink>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 
-<style lang="scss">
-  .is-sticky {
-    position: sticky; /* only works if <nav> is the root element of this component*/
-      top: 0;
-      max-height: 100vh;
-      overflow: scroll;
-      border-right: 1px solid #ddd;
-  }
-
+<style lang="scss" scoped>
   nav {
+    // border: 1px solid red;
+
     li {
       li {
         list-style-type: circle;

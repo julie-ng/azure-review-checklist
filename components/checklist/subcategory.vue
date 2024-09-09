@@ -7,6 +7,10 @@
       type: String,
       required: true
     },
+    subcategoryKey: {
+      type: String,
+      required: true
+    },
     items: {
       type: Array,
       required: true
@@ -16,7 +20,7 @@
 
 <template>
   <section class="my-4 px-5 py-4">
-    <h1 class="is-size-4 py-3 has-text-weight-bold">{{ props.title }}</h1>
+    <h1 :id="props.subcategoryKey" class="is-size-4 py-3 has-text-weight-bold">{{ props.title }}</h1>
     <ChecklistHeaderRow />
     <article v-for="item in props.items"
       :key="item.guid"
