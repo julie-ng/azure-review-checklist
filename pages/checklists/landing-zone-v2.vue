@@ -27,19 +27,11 @@
 
             <section v-for="(category, catKey) in list" :key="catKey">
               <h1 class="is-size-3 py-3 has-text-weight-bold">{{ checklistStore.getCategoryTitle(catKey) }}</h1>
-
-              <section v-for="(subcategory, subcatKey) in category" :key="subcatKey">
-                <h1 class="is-size-4 py-3 has-text-weight-bold">{{ checklistStore.getSubcategoryTitle(subcatKey) }}</h1>
-                <article v-for="item in subcategory"
-                  :key="item.guid"
-                  :data-id="item.id"
-                  :data-guid="item.guid"
-                  :data-severity="item.severity"
-                  :data-waf-pillar="item.waf"
-                >
-                  <ChecklistItem :id="item.id" :pillar="item.waf" :text="item.text" />
-                </article>
-              </section>
+                <ChecklistSubcategory v-for="(subcategory, subcatKey) in category"
+                  :key="subcatKey"
+                  :items="subcategory"
+                  :title="checklistStore.getSubcategoryTitle(subcatKey)">
+                </ChecklistSubcategory>
             </section>
           </div>
         </div>
