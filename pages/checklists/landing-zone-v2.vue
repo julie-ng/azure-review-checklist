@@ -37,30 +37,7 @@
                   :data-severity="item.severity"
                   :data-waf-pillar="item.waf"
                 >
-
-                  <div class="columns table-row ">
-                    <div class="column is-1 pt-5 pb-3">
-                      <p class="is-size-6">
-                        {{ item.id }}
-                      </p>
-                    </div>
-                    <div class="column is-1 pt-5 pb-3" style="width: 10%">
-                      <p class="is-size-6">
-                        {{ item.waf }}
-                      </p>
-                    </div>
-                    <div class="column is-8 pt-5 pb-3">
-                      <p class="is-size-5">
-                        {{ item.text }}
-                      </p>
-                    </div>
-                    <div class="column pt-5 pb-3 is-2">
-                      <ChecklistItemDropdown/>
-                    </div>
-                  </div>
-
-
-
+                  <ChecklistItem :id="item.id" :pillar="item.waf" :text="item.text" />
                 </article>
               </section>
             </section>
@@ -88,11 +65,3 @@
   </div>
 </template>
 
-<style lang="scss">
-.table-row {
-  border-bottom: 1px solid var(--bulma-grey-lighter);
-  .column {
-    // border: 1px solid red;
-  }
-}
-</style>
