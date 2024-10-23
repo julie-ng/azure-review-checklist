@@ -1,15 +1,11 @@
+<script setup>
+</script>
+
 <template>
   <div>
-    <SiteHeader/>
-
-      <slot />
-    <SiteFooter/>
+    <div class="notification is-warning is-light is-size-6">
+      This is the <strong>default</strong> layout.
+    </div>
+    <slot />
   </div>
 </template>
-
-
-<style lang="scss">
-  html {
-    scroll-behavior: smooth;
-  }
-</style>
