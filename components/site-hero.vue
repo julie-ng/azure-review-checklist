@@ -27,8 +27,8 @@ const heroClasses = () => `hero is-small ${props.style}`
 <template>
   <section :class="heroClasses()">
     <div class="hero-body">
-    <div class="container py-3">
-        <p class="title has-text-weight-semibold">{{ props.title }}</p>
+    <div class="container py-2">
+        <p class="title is-size-4 has-text-weight-semibold">{{ props.title }}</p>
         <p v-if="props.subtitle" class="subtitle">{{ props.subtitle }}</p>
       </div>
     </div>
