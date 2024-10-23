@@ -60,12 +60,12 @@
  @forward "~/node_modules/bulma/sass/elements/title";
 
  // Form
- // @forward "~/node_modules/bulma/sass/form/checkbox-radio";
- // @forward "~/node_modules/bulma/sass/form/file";
- // @forward "~/node_modules/bulma/sass/form/input-textarea";
- // @forward "~/node_modules/bulma/sass/form/select";
- // @forward "~/node_modules/bulma/sass/form/shared";
- // @forward "~/node_modules/bulma/sass/form/tools";
+ @forward "~/node_modules/bulma/sass/form/checkbox-radio";
+ @forward "~/node_modules/bulma/sass/form/file";
+ @forward "~/node_modules/bulma/sass/form/input-textarea";
+ @forward "~/node_modules/bulma/sass/form/select";
+ @forward "~/node_modules/bulma/sass/form/shared";
+ @forward "~/node_modules/bulma/sass/form/tools";
 
 
  // Grid
