@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open in a browser: [localhost:3000/checklists/landing-zone](http://localhost:3000/checklists/landing-zone) 
+Open in a browser: [localhost:3300/checklists/landing-zone](http://localhost:3300/checklists/landing-zone) 
 
 ## Data Model
 

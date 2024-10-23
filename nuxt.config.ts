@@ -8,5 +8,9 @@ export default defineNuxtConfig({
     '~/assets/main.scss'
   ],
 
+  devServer: {
+    port: 3300,
+  },
+
   modules: ['@pinia/nuxt']
 })
