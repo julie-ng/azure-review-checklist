@@ -68,11 +68,11 @@ const props = defineProps({
   vertical-align: middle;
   max-width: 16px;
   max-height: 16px;
-  opacity: 0.3;
+  opacity: 0.4;
 
   &:hover {
-    opacity: 0.8;
-    transition: opacity 0.5s;
+    opacity: 1;
+    transition: opacity 0.6s;
   }
 }
 </style>
