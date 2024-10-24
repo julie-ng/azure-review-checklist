@@ -2,10 +2,11 @@
 </script>
 
 <template>
-  <div>
-    <div class="notification is-warning is-light is-size-6">
-      This is the <strong>default</strong> layout.
-    </div>
+  <SiteHeader />
+
+  <div class="container">
     <slot />
   </div>
+
+  <SiteFooter />
 </template>

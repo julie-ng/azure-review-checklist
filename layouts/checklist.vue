@@ -2,7 +2,30 @@
 </script>
 
 <template>
-  <SiteHeader checklistTitle="Landing Zone" checklistLink="#" />
-  <slot/>
-  <SiteFooter/>
+  <div>
+    <SiteHeader :is-fixed="true" />
+
+    <div class="container">
+      <div class="columns is-gapless">
+        <div class="column is-2">
+          <div class="mr-2 has-sticky-side-nav">
+            <SidebarNavigation />
+          </div>
+        </div>
+        <div class="column" role="main">
+          <main class="px-2 py-5">
+            <slot />
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <SiteFooter />
+  </div>
 </template>
+
+<style lang="scss">
+[role="main"] {
+  min-height: 600px;
+}
+</style>

@@ -16,43 +16,21 @@
 </script>
 
 <template>
-
   <div>
     <ClientOnly>
-    <div class="container">
-      <div class="columns is-gapless">
-        <div class="column is-2">
-          <div class="mr-2 has-sticky-side-nav">
-            <SidebarNavigation />
-          </div>
-        </div>
-        <div class="column">
-          <div class="px-2 py-5">
-            <section v-for="(category, catKey) in list" :key="catKey">
-              <h1 class="is-size-4 py-3 px-5 has-text-weight-semibold has-text-white has-sticky-category-heading" :id="catKey">
-                {{ checklistStore.getCategoryTitle(catKey) }}
-              </h1>
-                <ChecklistSubcategory v-for="(subcategory, subcatKey) in category"
-                  :key="subcatKey"
-                  :subcategoryKey="subcatKey"
-                  :items="subcategory"
-                  :title="checklistStore.getSubcategoryTitle(subcatKey)">
-                </ChecklistSubcategory>
-            </section>
-          </div>
-        </div>
-      </div>
-
-      <!-- <hr>
-      <details>
-        <summary>Raw JSON</summary>
-        <pre><code>{{ list }}</code></pre>
-      </details> -->
-
-    </div>
-  </ClientOnly>
+      <section v-for="(category, catKey) in list" :key="catKey">
+        <h1 class="is-size-4 py-3 px-5 has-text-weight-semibold has-text-white has-sticky-category-heading" :id="catKey">
+          {{ checklistStore.getCategoryTitle(catKey) }}
+        </h1>
+          <ChecklistSubcategory v-for="(subcategory, subcatKey) in category"
+            :key="subcatKey"
+            :subcategoryKey="subcatKey"
+            :items="subcategory"
+            :title="checklistStore.getSubcategoryTitle(subcatKey)">
+          </ChecklistSubcategory>
+      </section>
+    </ClientOnly>
   </div>
-
 </template>
 
 <style lang="scss">

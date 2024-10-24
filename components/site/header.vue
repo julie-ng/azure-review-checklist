@@ -1,5 +1,22 @@
+<script setup>
+const props = defineProps({
+  isFixed: {
+    type: Boolean,
+    required: false,
+    default: false
+  }
+})
+
+function navbarClasses () {
+  return props.isFixed
+    ? 'navbar is-fixed-top'
+    : 'navbar'
+}
+
+</script>
+
 <template>
-  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <nav :class="navbarClasses()" role="navigation" aria-label="main navigation">
     <div class="container is-size-5">
       <div class="navbar-brand">
         <span class="navbar-item pr-1">
