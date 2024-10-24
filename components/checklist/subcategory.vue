@@ -29,7 +29,13 @@
       :data-severity="item.severity"
       :data-waf-pillar="item.waf"
     >
-      <ChecklistItem :id="item.id" :pillar="item.waf" :text="item.text" />
+      <ChecklistItem
+        :id="item.id"
+        :pillar="item.waf"
+        :text="item.text"
+        :doc-link="item.link"
+        :training-link="item.training">
+      </ChecklistItem>
     </article>
   </section>
 </template>

@@ -10,8 +10,18 @@ const props = defineProps({
     default: ''
   },
   text: {
-    required: String,
+    type: String,
     required: true
+  },
+  docLink: {
+    type: String,
+    required: false,
+    default: 'default'
+  },
+  trainingLink: {
+    type: String,
+    required: false,
+    default: 'training'
   }
 })
 </script>
@@ -36,6 +46,14 @@ const props = defineProps({
       <div class="column is-2">
         <ChecklistItemDropdown/>
       </div>
+      <div class="column is-2">
+        <NuxtLink :to="props.docLink" target="_blank" class="mr-3" title="Link to Documentation">
+          <img src="/images/iconmonstr-info-6.svg" alt="Documentation" class="icon">
+        </NuxtLink>
+        <NuxtLink :to="props.trainingLink" target="_blank" title="Link to Training">
+          <img src="/images/iconmonstr-school-21.svg" alt="Training" class="icon">
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -43,5 +61,18 @@ const props = defineProps({
 <style lang="scss">
 .table-row {
   border-top: 1px solid var(--msft-warm-light-grey); // #DEE6EA;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 16px;
+  max-height: 16px;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 0.8;
+    transition: opacity 0.5s;
+  }
 }
 </style>
