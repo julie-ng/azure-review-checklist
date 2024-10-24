@@ -19,7 +19,7 @@
       <div class="columns is-gapless">
         <div class="column is-2">
           <div class="mr-2 has-sticky-side-nav">
-            <ReviewNavigation :items="list" :categories="categories" :subcategories="subcategories" />
+            <SidebarNavigation />
           </div>
         </div>
         <div class="column">
