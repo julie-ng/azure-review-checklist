@@ -33,7 +33,7 @@ export const useChecklistStore = defineStore('ChecklistStore', () => {
       console.error('Error', error)
     }
 
-    rawJson.value = data.value
+    rawJson.value = data.value.data
     version.value = data.value.hash
 
     log.frontend(data.value)
