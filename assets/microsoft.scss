@@ -7,7 +7,8 @@
   --msft-blueblack: #091f2c;
 
   --msft-cool-grey: #b1b3b3;
-  --msft-dark-grey: #454142
+  --msft-dark-grey: #454142;
+  --msft-warm-light-grey: #e8e6df;
 
   /**
    * MSFT Learn Color base-palette;
@@ -38,4 +39,24 @@
   --msft-teal: #49c5b1;
   --msft-light-teal: #b9dcd2;
   --msft-deep-teal: #255b62;
+}
+
+.has-msft-black-color {
+  color: var(--msft-black);
+}
+
+.has-msft-blue-color {
+  color: var(--msft-blue);
+}
+
+.has-msft-darkblue-color {
+  color: var(--msft-dark-blue);
+}
+
+.has-msft-cool-grey-color {
+  color: var(--msft-cool-grey);
+}
+
+.has-msft-dark-grey-color {
+  color: var(--msft-dark-grey);
 }

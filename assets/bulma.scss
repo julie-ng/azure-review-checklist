@@ -1,3 +1,4 @@
+
 /**
  * Configure
  * =========
@@ -9,7 +10,7 @@
  $teal: #1AACAC;
 
  @use "~/node_modules/bulma/sass/utilities" with (
-   $family-primary: '"Inter var", "Inter", sans-serif',
+   $family-primary: '"Segoe UI", "Segoe Sans", sans-serif',
    $primary: #38419D, //2B3499,
    $link: #2229d2, //$teal
    $info: #22b7f6,
@@ -23,6 +24,8 @@
    $size-6: 0.9rem,
    $size-7: 0.8rem
  );
+
+
 
  /**
   * Bulma Sass
@@ -81,7 +84,10 @@
  // Import the themes so that all CSS variables have a value
  @forward "~/node_modules/bulma/sass/themes";
 
-
+@font-face {
+  font-family: "Segoe Sans";
+  src: url("/fonts/segoe-sans.woff2");
+}
  /**
   * Bulma customizations
   * ====================
