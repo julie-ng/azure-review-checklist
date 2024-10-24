@@ -19,12 +19,12 @@ function navbarClasses () {
   <nav :class="navbarClasses()" role="navigation" aria-label="main navigation">
     <div class="container is-size-5">
       <div class="navbar-brand">
-        <span class="navbar-item pr-1">
-          <img src="/images/azure-logo-48px.svg">
-        </span>
-        <span class="navbar-item px-1 has-text-weight-bold has-msft-blue-color">
-          Azure Review Checklists
-        </span>
+        <NuxtLink to="/" class="navbar-item">
+            <img src="/images/azure-logo-48px.svg">
+          <span class="has-text-weight-bold has-msft-blue-color">
+            Azure Review Checklists
+          </span>
+        </NuxtLink>
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
