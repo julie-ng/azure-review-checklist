@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container is-size-5">
       <div class="navbar-brand">
         <span class="navbar-item pr-1">
@@ -30,7 +30,7 @@
 
 <style lang="scss">
 .navbar {
-  background: none;
+  // background: none;
   border-bottom: 1px solid var(--msft-warm-light-grey);
 }
 </style>
