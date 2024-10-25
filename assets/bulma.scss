@@ -11,9 +11,9 @@
 
  @use "~/node_modules/bulma/sass/utilities" with (
    $family-primary: '"Segoe UI", "Segoe Sans", sans-serif',
-   $primary: #38419D, //2B3499,
-   $link: #2229d2, //$teal
-   $info: #22b7f6,
+   $primary: #0078d4, // msft blue
+   $link: #0078d4, // msft blue again?
+   $info: #8dc8e8, // msft light blue
    // $success: #65B741, //1AACAC,
    // $pre-background: #404654, // doesn't work??
    $size-1: 2.5rem,
