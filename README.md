@@ -13,12 +13,6 @@ Open in a browser: [localhost:3300/checklists/landing-zone](http://localhost:330
 
 ## Data Model
 
-Each checklist has 3 properties
-
-- `list`
-- `categories` for headings
-- `subcategories` for headings
-
 ### Source Schema
 
 The [source JSON files](https://github.com/Azure/review-checklists/tree/main/checklists) have a root `items` Array of objects containing each checklist item:
