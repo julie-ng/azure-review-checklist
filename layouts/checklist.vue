@@ -27,8 +27,11 @@
 <style lang="scss">
 [role="main"] {
   min-height: 600px;
+}
 
-  // offset fixed header navigation
+// offset fixed header navigation
+.has-sticky-side-nav, // TODO: double check component code
+[role="main"] {
   position: relative;
   top: 58px;
 }
