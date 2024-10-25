@@ -7,7 +7,7 @@
   const { data: content } = await useAsyncData('content', () => queryContent(`/checklists/${slug}`).findOne())
 
   definePageMeta({
-    layout: 'checklist'
+    layout: false
   })
 
   useHead({
@@ -29,51 +29,63 @@
 
 <template>
   <div>
-    <div class="content">
-      <div class="intro mt-1 mb-4">
-        <ContentRenderer :value="content">
-          <h1>{{ content.title }}</h1>
-          <ChecklistMetadata
-            :status="schema.metadata.state"
-            :timestamp="schema.metadata.timestamp"/>
-          <ContentRendererMarkdown :value="content" />
-          <h1>Checklist Items</h1>
-        </ContentRenderer>
+    <SiteHeader :is-fixed="true" />
+    <div class="container">
+      <div class="columns is-gapless">
+        <div class="column is-2">
+          <div class="mr-2 has-sticky-side-nav">
+            <SidebarNavigation :schema="list" />
+          </div>
+        </div>
+        <div class="column" role="main">
+          <main class="content px-2 pt-2">
+            <ContentRenderer :value="content">
+              <h1>{{ content.title }}</h1>
+              <ChecklistMetadata
+                :status="schema.metadata.state"
+                :timestamp="schema.metadata.timestamp"/>
+              <ContentRendererMarkdown :value="content" />
+              <h1>Checklist Items</h1>
+            </ContentRenderer>
+
+            <ClientOnly>
+              <section v-for="(category, catKey) in list" :key="catKey">
+                <!-- <pre><code>{{ category.title }}</code></pre> -->
+                <h1 class="is-size-4 py-3 px-5 has-text-weight-semibold has-text-white has-sticky-category-heading" >
+                  {{ category.title }}
+                </h1>
+                <ChecklistSubcategory v-for="(subcategory, subcatKey) in category.subcategories"
+                  :key="subcatKey"
+                  :subcategoryKey="subcatKey"
+                  :items="subcategory.items"
+                  :title="subcategory.title">
+                </ChecklistSubcategory>
+              </section>
+            </ClientOnly>
+          </main>
+        </div>
       </div>
-
-      <ClientOnly>
-      <section v-for="(category, catKey) in list" :key="catKey">
-        <!-- <pre><code>{{ category.title }}</code></pre> -->
-        <h1 class="is-size-4 py-3 px-5 has-text-weight-semibold has-text-white has-sticky-category-heading" >
-          {{ category.title }}
-        </h1>
-        <ChecklistSubcategory v-for="(subcategory, subcatKey) in category.subcategories"
-          :key="subcatKey"
-          :subcategoryKey="subcatKey"
-          :items="subcategory.items"
-          :title="subcategory.title">
-        </ChecklistSubcategory>
-      </section>
-      </ClientOnly>
-
-      <hr>
-
-      <details>
-        <summary>
-          <h1>Schema</h1>
-        </summary>
-        <ClientOnly> <!-- Theory: hydration mismatch is because of JSON spacing -->
-          <pre><code>{{ schema.schema }}</code></pre>
-        </ClientOnly>
-      </details>
     </div>
+
+    <SiteFooter />
   </div>
 </template>
 
 <style lang="scss">
-  body {
-    // background: #f4f8fb;
-    // background: var(--msft-off-white); //#f4f3f5; //#f4faff; //#fbfbfb;
+  // body {
+  //   background: #f4f8fb;
+  //   background: var(--msft-off-white); //#f4f3f5; //#f4faff; //#fbfbfb;
+  // }
+
+  [role="main"] {
+    min-height: 600px;
+  }
+
+  // offset fixed header navigation
+  .has-sticky-side-nav, // TODO: double check component code
+  [role="main"] {
+    position: relative;
+    top: 58px;
   }
 
   .has-sticky-side-nav {

@@ -1,3 +1,13 @@
+<script setup>
+const props = defineProps({
+  schema: {
+    type: Object,
+    required: false,
+    default: null
+  }
+})
+</script>
+
 <template>
   <div>
     <ClientOnly>
@@ -9,7 +19,8 @@
       <p class="mt-5 mb-2 is-size-7 has-text-weight-semibold is-uppercase has-msft-cool-grey-color">
         Categories
       </p>
-      <ChecklistNavigation />
+
+      <ChecklistNavigation :schema="props.schema" />
     </ClientOnly>
   </div>
 </template>
