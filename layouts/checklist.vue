@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="column" role="main">
-          <main class="px-2 py-5">
+          <main class="px-2 pt-2">
             <slot />
           </main>
         </div>
@@ -27,5 +27,12 @@
 <style lang="scss">
 [role="main"] {
   min-height: 600px;
+}
+
+// offset fixed header navigation
+.has-sticky-side-nav, // TODO: double check component code
+[role="main"] {
+  position: relative;
+  top: 58px;
 }
 </style>

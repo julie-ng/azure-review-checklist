@@ -1,24 +1,25 @@
 <script setup>
-  import { useChecklistStore } from '~/stores/ChecklistStore'
-
-  const checklistStore = useChecklistStore()
-  const items = checklistStore.list
-  const categories = checklistStore.categories
-  const subcategories = checklistStore.subcategories
+  const props = defineProps({
+    schema: {
+      type: Object,
+      required: false,
+      default: null
+    }
+  })
 </script>
 
 <template>
   <nav>
     <div class="categories mr-4">
-      <details v-for="(cat, catKey) in items">
+      <details v-for="(category, catKey) in props.schema">
         <summary class="py-2 pr-2">
           <span>
-            <NuxtLink :to="anchorLink(catKey)" class="has-text-weight-semibold has-text-primary-ter is-size-7">{{ categories[catKey] }}</NuxtLink>
+            <NuxtLink :to="anchorLink(catKey)" class="has-text-weight-semibold has-text-primary-ter is-size-7">{{ category.title }}</NuxtLink>
           </span>
         </summary>
         <ul class="subcategories mt-2 mb-4">
-          <li v-for="(subcat, subcatKey) in cat" class="mr-3 mb-2 is-size-7">
-            <NuxtLink :to="anchorLink(subcatKey)">{{ subcategories[subcatKey] }}</NuxtLink>
+          <li v-for="(subcategory, subcatKey) in category.subcategories" class="mr-3 mb-2 is-size-7">
+            <NuxtLink :to="anchorLink(subcatKey)">{{ subcategory.title }}</NuxtLink>
           </li>
         </ul>
       </details>
