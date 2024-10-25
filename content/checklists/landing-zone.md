@@ -1,5 +1,5 @@
 ---
-title: Landing Zone Checklist
+title: Landing Zone
 description: Azure Landing Zone Review Checklist 
 checklist:
   source: alz_checklist.en.json

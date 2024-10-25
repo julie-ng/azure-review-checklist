@@ -1,5 +1,5 @@
 ---
-title: Multitenancy Checklist
+title: Multitenancy
 description: Azure Review Checklist for multitenancy workloads
 checklist: 
   source: multitenancy_checklist.en.json
