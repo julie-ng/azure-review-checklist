@@ -51,33 +51,23 @@ To help display the items in a UI, the items are grouped into categories and sub
 ```javascript
 const list = {
   'category-key': {
-    'subcat-key-1': [
-      {…}, 
-      {…}
-    ],
-    'subcat-key-2': [
-      {…}, 
-      {…}
-    ]
+    title: 'Category Title',
+    subcategories: {
+      'subcat-key-1': {
+        title: 'Subcategory 1 Title',
+        items: [
+          {…}
+          {…}
+        ]
+      }
+      'subcat-key-2': {
+        title: 'Subcategory 2 Title',
+        items: [
+          {…}
+          {…}
+        ]
+      }      
+    }
   }
 }
-
-```
-
-And then `categories` and `subcategories` are used to keep track of the human readable headings, which are mapped to their key form (lower case and dashes).
-
-
-```javascript
-const categories = {
-  'resource-organization': 'Resource Organization',
-  'network-topology-and-connectivity': 'Network Topology and Connectivity',
-  // …
-}
-
-const subcategories = {
-  'naming-and-tagging': 'Naming and Tagging',
-  'subscriptions': 'Subscriptions'
-  // …
-}
-
 ```
