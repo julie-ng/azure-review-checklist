@@ -5,6 +5,12 @@
   const slug = route.params.slug[0]
 
   const { data: content } = await useAsyncData('content', () => queryContent(`/checklists/${slug}`).findOne())
+  if (!content.value) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Page Not Found'
+    })
+  }
 
   definePageMeta({
     layout: false
