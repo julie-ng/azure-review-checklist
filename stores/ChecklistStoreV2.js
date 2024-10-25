@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { defineStore, skipHydrate } from 'pinia'
+import { defineStore } from 'pinia'
 
 /**
  * Checklist Store
@@ -11,18 +11,26 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
   // new props
   const db = ref({})
 
-  // old props
-  const version = ref('')
-  const versionShort = computed(() => version.value.slice(0, 8))
-  // /old
-
 
   /**
    * @function init
+   * @param {String} paramsObj.key - key to save checklist data in DB
+   * @param {String} paramsObj.source - name of source JSON file, e.g. `multitenancy_checklist.en.json`
    * @returns null
    */
-  async function init (key) {
-    log.frontend(`[💾 ChecklistStoreV2] init(${key})`)
+  async function init (paramsObj) {
+    const key = paramsObj.key
+    console.log(`[💾 ChecklistStoreV2] init(${key})`)
+
+    // if (db.value.hasOwnProperty(key)) {
+    //   console.log(`Checklist ${key} already exists`)
+    // } else {
+    //   console.log(`Checklist ${key} does NOT exist`)
+    //   await load(paramsObj)
+    // }
+
+    // Debugging: load new every time
+    await load(paramsObj)
   }
 
   /**
@@ -34,12 +42,13 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
   async function load (paramsObj) {
     const url           = useRequestURL() // get hostname
     const sourceParts   = paramsObj.source.split('.')
-    const checklistLang = sourceParts[1]
-    const checklistKey  = `${paramsObj.key}-${checklistLang}`
+    // const checklistLang = sourceParts[1]
+    // const checklistKey  = `${paramsObj.key}-${checklistLang}`
+    const checklistKey  = `${paramsObj.key}`
     const checklistUrl  = `${url.origin}/data/checklists/${paramsObj.source}`
 
     // console.log('Got params', { key: paramsObj.key, source: paramsObj.source, lang: checklistLang})
-    console.log('Loading…', checklistUrl)
+    // console.log('Loading…', checklistUrl)
     const { data, error } = await useFetch(checklistUrl)
 
     if (error.value !== null) {
@@ -48,7 +57,7 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
     }
 
     const { schema } = useChecklistSchema(data.value)
-    console.log('🐞 schema', schema)
+    // console.log('🐞 schema', schema)
 
     db.value[checklistKey] = {
       rawJSON: data.value,
@@ -57,40 +66,18 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
     }
   }
 
-  // function createSchema (rawJson) {
-
-  //   // TODO: rename
-  //   // const cats = {}
-  //   // const subcats = {}
-  //   // const itemsList = [] // need this ??
-
-  //   // rawJson.items.forEach(function(item) {
-  //   //   const catKey = toLowerDashed(item.category)
-  //   //   const subcatKey = toLowerDashed(item.subcategory)
-
-  //   //   if (!_hasCategory (catKey)) {
-  //   //     list.value[catKey] = {}
-  //   //     categories.value[catKey] = item.category
-  //   //   }
-
-  //   //   if (!_hasSubcategory (catKey, subcatKey)) {
-  //   //     list.value[catKey][subcatKey] = []
-  //   //     subcategories.value[subcatKey] = item.subcategory
-  //   //   }
-
-  //   //   list.value[catKey][subcatKey].push(item)
-  //   // })
-  // }
-
-
-   /**
-   * Reset Local Storage
+  /**
+   * Get Checklist Schema by key
+   *
+   * @param {String} checklistKey
+   * @returns {Object} non-reactive
    */
-  //  async function $reset() {
-  //   localStorage.removeItem(LOCAL_STORAGE_KEY)
-  //   await init()
-  // }
+  function getSchema (checklistKey) {
+    console.log('getSchema()');
+    // return 'schema coming soon…'
 
+    return db.value[checklistKey]
+  }
 
   /**
    * ------------
@@ -102,6 +89,6 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
     db,
     init,
     load,
-    // $reset
+    getSchema
   }
 })
