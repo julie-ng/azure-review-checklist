@@ -33,6 +33,9 @@
       <div class="intro mt-1 mb-4">
         <ContentRenderer :value="content">
           <h1>{{ content.title }}</h1>
+          <ChecklistMetadata
+            :status="schema.metadata.state"
+            :timestamp="schema.metadata.timestamp"/>
           <ContentRendererMarkdown :value="content" />
           <h1>Checklist Items</h1>
         </ContentRenderer>
