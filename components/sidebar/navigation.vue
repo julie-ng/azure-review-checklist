@@ -7,7 +7,7 @@
       <ChecklistDropdown />
 
       <p class="mt-5 mb-2 is-size-7 has-text-weight-semibold is-uppercase has-msft-cool-grey-color">
-        Contents
+        Categories
       </p>
       <ChecklistNavigation />
     </ClientOnly>
