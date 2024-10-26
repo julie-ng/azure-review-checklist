@@ -73,10 +73,17 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
    * @returns {Object} non-reactive
    */
   function getSchema (checklistKey) {
-    console.log('getSchema()');
-    // return 'schema coming soon…'
-
+    // console.log(`getSchema(${checklistKey})`)
     return db.value[checklistKey]
+  }
+
+  /**
+   * Resets Store Database
+   * Useful if checklist source JSON changed.
+   */
+  function $reset ()  {
+    console.log(`[🐛 ChecklistStore] $reset()`)
+    db.value = {}
   }
 
   /**
@@ -89,6 +96,7 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
     db,
     init,
     load,
-    getSchema
+    getSchema,
+    $reset
   }
 })
