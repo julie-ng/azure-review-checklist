@@ -4,7 +4,11 @@
   const route = useRoute()
   const slug = route.params.slug[0]
 
-  const { data: content } = await useAsyncData('content', () => queryContent(`/checklists/${slug}`).findOne())
+  const jsonFile = ref('')
+  const list = ref({})
+  const schema = ref({})
+
+  const { data: content } = await useAsyncData(`${slug}-content`, () => queryContent(`/checklists/${slug}`).findOne())
   if (!content.value) {
     throw createError({
       statusCode: 404,
@@ -20,16 +24,19 @@
     title: content.value.title
   })
 
-  // console.log('checklist source', content.value.checklist.source)
+  console.log('checklist source', content.value.checklist.source)
+  console.log(content.value)
 
-  const checklistKey = slug
-  const jsonFile =  content.value.checklist.source
+
+  jsonFile.value =  content.value.checklist.source
+
   await checklistStore.init({
-    key: checklistKey,
-    source: jsonFile
+    key: slug,
+    source: jsonFile.value
   })
-  const schema = checklistStore.getSchema(checklistKey)
-  const list = schema.schema
+  schema.value = checklistStore.getSchema(slug)
+
+  list.value = schema.value.schema
 </script>
 
 
