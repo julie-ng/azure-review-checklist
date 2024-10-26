@@ -1,5 +1,3 @@
-const schema = {}
-
 /**
  * Checklist Schema Composable
  * Non-reactive because schema is should be read-only after generated from JSON
@@ -8,20 +6,23 @@ const schema = {}
  * @returns {Object} with `schema`
  */
 export const useChecklistSchema = (rawJson) => {
-  // console.log('🐛 useChecklistSchema()')
+  // console.log('[🐛 useChecklistSchema()]')
+
+  // reset schema
+  const schema = {}
 
   rawJson.items.forEach(function(item) {
     const catKey = toLowerDashed(item.category)
     const subcatKey = toLowerDashed(item.subcategory)
 
-    if (!_hasCategory (catKey)) {
+    if (!_hasCategory (schema, catKey)) {
       schema[catKey] = {
         title: item.category,
         'subcategories': {}
       }
     }
 
-    if (!_hasSubcategory (catKey, subcatKey)) {
+    if (!_hasSubcategory (schema, catKey, subcatKey)) {
       schema[catKey].subcategories[subcatKey] =  {
         title: item.subcategory,
         items: []
@@ -46,7 +47,7 @@ export const useChecklistSchema = (rawJson) => {
  * @param {String} categoryKey for lookup in object
  * @returns Boolean
  */
-function _hasCategory (categoryKey) {
+function _hasCategory (schema, categoryKey) {
   return schema.hasOwnProperty(categoryKey)
 }
 
@@ -56,7 +57,7 @@ function _hasCategory (categoryKey) {
  * @param {String} subcatKey
  * @returns Boolean
  */
-function _hasSubcategory (catKey, subcatKey) {
+function _hasSubcategory (schema, catKey, subcatKey) {
   return schema.hasOwnProperty(catKey)
     && schema[catKey].subcategories.hasOwnProperty(subcatKey)
 }
