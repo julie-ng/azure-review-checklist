@@ -40,6 +40,9 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
    * @returns null
    */
   async function load (paramsObj) {
+    console.log('[🐛 ChecklistStore.load()] Got params', { key: paramsObj.key, source: paramsObj.source})
+
+    // -- Setup --
     const url           = useRequestURL() // get hostname
     const sourceParts   = paramsObj.source.split('.')
     // const checklistLang = sourceParts[1]
@@ -47,8 +50,10 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
     const checklistKey  = `${paramsObj.key}`
     const checklistUrl  = `${url.origin}/data/checklists/${paramsObj.source}`
 
-    // console.log('Got params', { key: paramsObj.key, source: paramsObj.source, lang: checklistLang})
-    // console.log('Loading…', checklistUrl)
+    // -- First reset existing --
+    db.value[checklistKey] = {}
+
+    // -- Load data from JSON --
     const { data, error } = await useFetch(checklistUrl)
 
     if (error.value !== null) {
@@ -56,9 +61,10 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
       return // TODO: throw error instead?
     }
 
+    // -- Generate Schema --
     const { schema } = useChecklistSchema(data.value)
-    // console.log('🐞 schema', schema)
 
+    // -- Set DB value --
     db.value[checklistKey] = {
       rawJSON: data.value,
       metadata: data.value.metadata,
