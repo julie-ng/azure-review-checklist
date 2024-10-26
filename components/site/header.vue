@@ -40,7 +40,9 @@ function navbarClasses () {
           </NuxtLink>
         </div>
         <div class="navbar-item">
-          About
+          <NuxtLink to="/about/">
+            About
+          </NuxtLink>
         </div>
       </div>
     </div>
