@@ -31,6 +31,7 @@
     >
       <ChecklistItem
         :id="item.id"
+        :guid="item.guid"
         :pillar="item.waf"
         :text="item.text"
         :doc-link="item.link"

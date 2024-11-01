@@ -4,6 +4,10 @@ const props = defineProps({
     type: String,
     required: true
   },
+  guid: {
+    type: String,
+    required: true
+  },
   pillar: {
     type: String,
     required: false,
@@ -24,6 +28,14 @@ const props = defineProps({
     default: 'training'
   }
 })
+
+function checked (evt) {
+  const checklistItemId = evt.target.dataset.checklistItemId
+  const checklistItemGuid = evt.target.dataset.checklistItemGuid
+  const isChecked = evt.target.checked
+  const debugCheckedMsg =  (isChecked) ? 'selected' : 'deselected'
+  console.log(`Checkbox ${checklistItemId} - ${debugCheckedMsg}`)
+}
 </script>
 
 <template>
@@ -31,7 +43,10 @@ const props = defineProps({
     <div class="columns mx-1">
       <div class="column is-1" style="width: 5%">
         <label class="checkbox">
-          <input type="checkbox">
+          <input type="checkbox" @input="checked"
+            :id="props.guid"
+            :data-checklist-item-guid="props.guid"
+            :data-checklist-item-id="props.id">
         </label>
       </div>
       <div class="column is-1">
