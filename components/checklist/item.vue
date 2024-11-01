@@ -63,6 +63,12 @@ const props = defineProps({
   border-top: 1px solid var(--msft-warm-light-grey); // #DEE6EA;
 }
 
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
 .icon {
   display: inline-block;
   vertical-align: middle;
