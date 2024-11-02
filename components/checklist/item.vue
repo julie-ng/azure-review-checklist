@@ -1,4 +1,7 @@
 <script setup>
+import { useChecklistStoreV2 } from '~/stores/ChecklistStoreV2'
+const checklistStore = useChecklistStoreV2()
+
 const props = defineProps({
   id: {
     type: String,
@@ -34,7 +37,16 @@ function checked (evt) {
   const checklistItemGuid = evt.target.dataset.checklistItemGuid
   const isChecked = evt.target.checked
   const debugCheckedMsg =  (isChecked) ? 'selected' : 'deselected'
-  console.log(`Checkbox ${checklistItemId} - ${debugCheckedMsg}`)
+  // console.log(`Checkbox ${checklistItemId} - ${debugCheckedMsg}`)
+
+  const HARDCODED_CHECKLIST_KEY = 'landing-zone'
+  const item = checklistStore.getItemByGuid(HARDCODED_CHECKLIST_KEY, checklistItemGuid)
+
+  if (item) {
+    console.groupCollapsed(`Found Item ${checklistItemGuid}`)
+    console.table(item)
+    console.groupEnd()
+  }
 }
 </script>
 

@@ -11,7 +11,6 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
   // new props
   const db = ref({})
 
-
   /**
    * @function init
    * @param {String} paramsObj.key - key to save checklist data in DB
@@ -67,6 +66,7 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
     // -- Set DB value --
     db.value[checklistKey] = {
       rawJSON: data.value,
+      index: _createGuidIndex(data.value.items),
       metadata: data.value.metadata,
       schema: schema
     }
@@ -81,6 +81,22 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
   function getSchema (checklistKey) {
     // console.log(`getSchema(${checklistKey})`)
     return db.value[checklistKey]
+  }
+
+  function getItemByGuid (checklistKey, guid) {
+    // const checklistItems = [guid]
+    const index = db.value[checklistKey].index
+    const found = Object.hasOwn(index, guid)
+    if (!found) {
+      console.warn(`[🐛 ChecklistStore] Item ${guid} not found in '${checklistKey}' checklist`)
+      return null
+    }
+
+
+    const itemIndex = db.value[checklistKey].index[guid]
+    // console.log('itemIndex', itemIndex)
+    return db.value[checklistKey].rawJSON.items[itemIndex]
+    // return '#foo'
   }
 
   /**
@@ -103,6 +119,24 @@ export const useChecklistStoreV2 = defineStore('ChecklistStoreV2', () => {
     init,
     load,
     getSchema,
+    getItemByGuid,
     $reset
   }
 })
+
+
+/**
+ * Creates an index of checklist items by their Guid
+ * and position in items array.
+ *
+ * @param {Array} itemsArray
+ * @returns {Object}
+ */
+function _createGuidIndex (itemsArray) {
+  const index = {}
+  itemsArray.forEach ((item, i) => {
+    index[item.guid] = i
+  })
+
+  return index
+}
