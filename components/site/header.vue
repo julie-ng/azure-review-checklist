@@ -35,12 +35,12 @@ function navbarClasses () {
 
       <div class="navbar-end is-size-6">
         <div class="navbar-item">
-          <NuxtLink to="/from-json/">
-            From JSON (WIP)
+          <NuxtLink to="/checklists-v2/">
+            Checklists (v2)
           </NuxtLink>
-          <NuxtLink to="/checklists/">
+          <!-- <NuxtLink to="/checklists/">
             Checklists
-          </NuxtLink>
+          </NuxtLink> -->
         </div>
         <div class="navbar-item">
           <NuxtLink to="/about/">

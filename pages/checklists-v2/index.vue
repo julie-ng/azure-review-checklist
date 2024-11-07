@@ -12,7 +12,7 @@
   // })
 
   function linkPath(c) {
-    return `/from-json/${c}`
+    return `./${c}`
   }
 
 </script>
