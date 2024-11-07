@@ -5,6 +5,9 @@
   const slug = route.params.slug[0]
   const checklistKey = route.params.slug[0]
 
+  /**
+   * Fetch categories and subcategories
+   */
   const { data: categories } = await useAsyncData(`${slug}-from-json-categories`, () => {
     return queryContent(`/from-json/${slug}`)
       .where({ _partial: { $eq: false }})
@@ -39,10 +42,32 @@
       }
 
       schema.subcategories[categoryKey].push(c)
-      schema.subcategories[c._path] = c // not sure we need this, but keeping for now.
+      // schema.subcategories[c._path] = c // not sure we need this, but keeping for now.
     }
   })
   // console.log('schema', schema)
+
+  /**
+   * Fetch Checklist Items
+   */
+
+  // async function fetchItems(subcategoryPath) {
+  //   const asyncCacheKey = subcategoryPath.replace('/', '-')
+  //   console.log('asyncCacheKey', asyncCacheKey)
+
+  //   const { data: items } = await useAsyncData(asyncCacheKey, () => {
+  //    return queryContent(subcategoryPath)
+  //      .where({ _partial: { $eq: true }})
+  //      .without(['body'])
+  //      .find()
+  //   })
+
+  //   console.log('items', items.value)
+
+  //   return items
+  // }
+
+
 </script>
 
 <template>
@@ -50,16 +75,24 @@
     <h1>Slug</h1>
     <pre><code>{{ slug }}</code></pre>
 
+    <ChecklistNavigationV2 :schema="schema" />
+
     <!-- <h1>List</h1>
     <pre><code>{{ list }}</code></pre> -->
 
     <h1>Categories & Subcategories</h1>
     <ul>
       <li v-for="c in schema.categories" :id="c._path">
-        {{ c.title }} <code>{{ c._path }}</code>
+        <h3>
+          {{ c.title }}
+          <!-- <code class="is-size-7">{{ c._path }}</code> -->
+        </h3>
         <ul>
           <li v-for="s in schema.subcategories[c._path]">
-            {{ s.title }}
+            <!-- {{ s.title }} -->
+            <!-- <code>{{ s._path }}</code> -->
+             <ChecklistSubcategoryV2 :title="s.title" :content-path="s._path" />
+
           </li>
         </ul>
       </li>
