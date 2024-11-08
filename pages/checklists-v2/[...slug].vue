@@ -19,7 +19,7 @@
   }
 
   /**
-   * Fetch categories and subcategories
+   * Fetch Categories and Subcategories
    */
   const { data: categories } = await useAsyncData(`${slug}-from-json-categories`, () => {
     return queryContent(`/from-json/${slug}`)
@@ -62,30 +62,6 @@
 
   // console.log('Subcategories')
   // console.log(schema.subcategories)
-
-
-
-  /**
-   * Fetch Checklist Items
-   */
-
-  // async function fetchItems(subcategoryPath) {
-  //   const asyncCacheKey = subcategoryPath.replace('/', '-')
-  //   console.log('asyncCacheKey', asyncCacheKey)
-
-  //   const { data: items } = await useAsyncData(asyncCacheKey, () => {
-  //    return queryContent(subcategoryPath)
-  //      .where({ _partial: { $eq: true }})
-  //      .without(['body'])
-  //      .find()
-  //   })
-
-  //   console.log('items', items.value)
-
-  //   return items
-  // }
-
-
 </script>
 
 <template>

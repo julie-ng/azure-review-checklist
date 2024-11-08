@@ -6,8 +6,7 @@ const props = defineProps({
   }
 })
 
-console.log(props.item)
-
+// console.log(props.item)
 
 // function checked (evt) {
 //   const checklistItemId = evt.target.dataset.checklistItemId
@@ -33,7 +32,7 @@ console.log(props.item)
       <div class="column is-1" style="width: 5%">
         <label class="checkbox">
           <input type="checkbox" @input="checked"
-            :id="anchorIdFromPath(props.item._path)"
+            :id="formIdFromItem(props.item, 'checkbox')"
             :data-checklist-item-guid="props.item.guid"
             :data-checklist-item-id="props.item.id">
         </label>
@@ -48,7 +47,7 @@ console.log(props.item)
         {{ props.item.text }}
       </div>
       <div class="column is-2">
-        <ChecklistItemDropdown :id="itemFormIdFromPath(props.item._path) "/>
+        <ChecklistItemDropdown :id="formIdFromItem(item, 'reason') "/>
       </div>
       <div class="column is-2">
         <NuxtLink :to="props.item.link" target="_blank" class="mr-3" title="Link to Documentation">
