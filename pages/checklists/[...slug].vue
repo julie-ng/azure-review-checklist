@@ -1,7 +1,7 @@
 <script setup>
   const route = useRoute()
   const slug = route.params.slug[0]
-  const checklistKey = route.params.slug[0]
+  // const checklistKey = route.params.slug[0]
 
   definePageMeta({
     layout: false
@@ -10,7 +10,13 @@
   /**
    * Fetch Markdown Content
    */
-  const { data: content } = await useAsyncData(`${slug}-content`, () => queryContent(`/checklists/${slug}`).findOne())
+  const { data: content } = await useAsyncData(`${slug}-content`, () => {
+    return queryContent(route.path)
+      .where({ _file: `checklists/${slug}/index.md` })
+      .findOne()
+  })
+
+
   if (!content.value) {
     throw createError({
       statusCode: 404,
@@ -21,8 +27,8 @@
   /**
    * Fetch Categories and Subcategories
    */
-  const { data: categories } = await useAsyncData(`${slug}-from-json-categories`, () => {
-    return queryContent(`/from-json/${slug}`)
+  const { data: categories } = await useAsyncData(`${slug}-categories`, () => {
+    return queryContent(route.path)
       .where({ _partial: { $eq: false }})
       .without(['body'])
       .find()
@@ -71,10 +77,10 @@
       <div class="columns is-gapless">
         <div class="column is-2">
           <div class="mr-2 has-sticky-side-nav">
-            <!-- <p class="mt-0 mb-2 is-size-7 has-text-weight-semibold is-uppercase has-msft-cool-grey-color">
+            <p class="mt-0 mb-2 is-size-7 has-text-weight-semibold is-uppercase has-msft-cool-grey-color">
               Checklist
             </p>
-            <ChecklistDropdown /> -->
+            <ChecklistDropdown />
 
             <p class="mt-5 mb-2 is-size-7 has-text-weight-semibold is-uppercase has-msft-cool-grey-color">
               Categories
@@ -85,14 +91,12 @@
         </div>
         <div class="column" role="main">
           <main class="content px-2 pt-2">
-            <ContentRenderer :value="content">
-              <h1>{{ content.title }}</h1>
-              <!-- <ChecklistMetadata
-                :status="schema.metadata.state"
-                :timestamp="schema.metadata.timestamp"/> -->
-              <ContentRendererMarkdown :value="content" />
-              <h1>Checklist Items</h1>
-            </ContentRenderer>
+            <h1>{{ content.title }}</h1>
+            <ChecklistMetadata :metadata="content.metadata" />
+            <!-- TODO: markdown rendering not working if md body is empty -->
+            <!-- <ContentDoc /> -->
+
+            <h2>Checklist Items</h2>
 
             <section v-for="category in schema.categories" :key="category._path">
               <h1 class="is-size-4 py-3 px-5 has-text-weight-semibold has-text-white has-sticky-category-heading"

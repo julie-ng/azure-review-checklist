@@ -35,8 +35,8 @@ function navbarClasses () {
 
       <div class="navbar-end is-size-6">
         <div class="navbar-item">
-          <NuxtLink to="/checklists-v2/">
-            Checklists (v2)
+          <NuxtLink to="/checklists/">
+            Checklists
           </NuxtLink>
           <!-- <NuxtLink to="/checklists/">
             Checklists
