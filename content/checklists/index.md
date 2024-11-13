@@ -1,5 +1,10 @@
 ---
-title: Checklists
+title: From JSON
+checklists:
+- landing-zone
+- multi-tenancy
 ---
 
-Select a checklist below.
+# Checklists
+
+Hello World
