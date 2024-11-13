@@ -10,10 +10,16 @@ const props = defineProps({
   }
 })
 
+const parts = props.contentPath.split('/')
+const dir = parts[parts.length-1]
+
 const asyncCacheKey = props.contentPath.replace('/', '-')
 const { data: items } = await useAsyncData(asyncCacheKey, () => {
   return queryContent(props.contentPath)
-    .where({ _partial: { $eq: true }})
+    .where({
+      _partial: { $eq: true },
+      _dir: { $eq: dir } // force exact directory match
+    })
     .without(['body'])
     .find()
 })
