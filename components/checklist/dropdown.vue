@@ -36,7 +36,7 @@
 <template>
   <div>
     <div class="select">
-      <select ref="selectRef" @change="onChange">
+      <select name="checklist-select" ref="selectRef" @change="onChange">
         <option v-for="list in checklists"
           :key="list._path"
           :value="list._path"
