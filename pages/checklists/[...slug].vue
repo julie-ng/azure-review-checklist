@@ -16,6 +16,7 @@
       .findOne()
   })
 
+  useContentHead(content)
 
   if (!content.value) {
     throw createError({

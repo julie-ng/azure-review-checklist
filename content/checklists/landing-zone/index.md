@@ -1,5 +1,5 @@
 ---
-title: Landing Zone
+title: Azure Landing Zone Review
 metadata:
   name: "Azure Landing Zone Review"
   state: "GA"

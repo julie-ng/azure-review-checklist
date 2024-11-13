@@ -1,5 +1,5 @@
 ---
-title: Multi-tenancy
+title: Multitenancy Architecture Review
 metadata:
   name: "Multitenant architecture"
   state: "GA"
