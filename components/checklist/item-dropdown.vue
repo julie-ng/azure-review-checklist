@@ -2,6 +2,13 @@
   const selectStyle = ref('')
   const selected = ref('')
 
+  const props = defineProps({
+    id: {
+      type: String,
+      required: true
+    }
+  })
+
   const statuses = {
     'not-set': {
       text: '-',
@@ -39,7 +46,7 @@
 
 <template>
   <div>
-    <select @change="onChange" :class="selectStyle">
+    <select @change="onChange" :class="selectStyle" :id="props.id">
       <option v-for="(status, key) in statuses" :key="key" :value="key">
         {{ status.text }}
       </option>

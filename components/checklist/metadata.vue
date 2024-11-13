@@ -1,14 +1,8 @@
 <script setup>
-const props = defineProps({
-  status: {
-    type: String,
-    required: false,
-    default: 'Unknown'
-  },
-  timestamp: {
-    type: String,
-    required: false,
-    default: 'Missing timestamp'
+defineProps({
+  metadata: {
+    type: Object,
+    required: true,
   }
 })
 </script>
@@ -18,11 +12,15 @@ const props = defineProps({
     <tbody>
       <tr >
         <th>Status</th>
-        <td>{{ props.status }}</td>
+        <td>{{ metadata.state }}</td>
       </tr>
       <tr>
         <th>Last Updated?</th>
-        <td>{{ props.timestamp }}</td>
+        <td>{{ metadata.timestamp }}</td>
+      </tr>
+      <tr>
+        <th>WAF</th>
+        <td>{{ metadata.waf }}</td>
       </tr>
     </tbody>
   </table>

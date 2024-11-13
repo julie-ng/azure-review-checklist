@@ -1,14 +1,22 @@
 <script setup>
-  import { useChecklistStoreV2 } from '~/stores/ChecklistStoreV2'
-  const checklistStore = useChecklistStoreV2()
   const route = useRoute()
   const slug = route.params.slug[0]
+  // const checklistKey = route.params.slug[0]
 
-  const jsonFile = ref('')
-  const list = ref({})
-  const schema = ref({})
+  definePageMeta({
+    layout: false
+  })
 
-  const { data: content } = await useAsyncData(`${slug}-content`, () => queryContent(`/checklists/${slug}`).findOne())
+  /**
+   * Fetch Markdown Content
+   */
+  const { data: content } = await useAsyncData(`${slug}-content`, () => {
+    return queryContent(route.path)
+      .where({ _file: `checklists/${slug}/index.md` })
+      .findOne()
+  })
+
+
   if (!content.value) {
     throw createError({
       statusCode: 404,
@@ -16,29 +24,51 @@
     })
   }
 
-  definePageMeta({
-    layout: false
+  /**
+   * Fetch Categories and Subcategories
+   */
+  const { data: categories } = await useAsyncData(`${slug}-categories`, () => {
+    return queryContent(route.path)
+      .where({ _partial: { $eq: false }})
+      .without(['body'])
+      .find()
+  })
+  // console.log('categories', categories.value)
+
+  const schema = {
+    categories: {},
+    subcategories: {
+      sortOrder: {},
+      lookup: {}
+    }
+  }
+
+  categories.value.forEach((c) => {
+    const parts         = c._path.split('/')
+    const isCategory    = parts.length === 4
+    const isSubcategory = parts.length === 5
+
+    if (isCategory) {
+      // console.log('isCategory', c._path)
+      schema.categories[c._path] = c
+    }
+
+    if (isSubcategory) {
+      // console.log('isSubcategory', c._path)
+      parts.pop()
+      const categoryKey = parts.join('/')
+
+      if (!Object.hasOwn(schema.subcategories.sortOrder, categoryKey)) {
+        schema.subcategories.sortOrder[categoryKey] = []
+      }
+      schema.subcategories.sortOrder[categoryKey].push(c)
+      schema.subcategories.lookup[c._path] = c  // need so that we don't have to search array above.
+    }
   })
 
-  useHead({
-    title: content.value.title
-  })
-
-  console.log('checklist source', content.value.checklist.source)
-  console.log(content.value)
-
-
-  jsonFile.value =  content.value.checklist.source
-
-  await checklistStore.init({
-    key: slug,
-    source: jsonFile.value
-  })
-  schema.value = checklistStore.getSchema(slug)
-
-  list.value = schema.value.schema
+  // console.log('Subcategories')
+  // console.log(schema.subcategories)
 </script>
-
 
 <template>
   <div>
@@ -47,34 +77,38 @@
       <div class="columns is-gapless">
         <div class="column is-2">
           <div class="mr-2 has-sticky-side-nav">
-            <SidebarNavigation :schema="list" />
+            <p class="mt-0 mb-2 is-size-7 has-text-weight-semibold is-uppercase has-msft-cool-grey-color">
+              Checklist
+            </p>
+            <ChecklistDropdown />
+
+            <p class="mt-5 mb-2 is-size-7 has-text-weight-semibold is-uppercase has-msft-cool-grey-color">
+              Categories
+            </p>
+            <ChecklistNavigationV2 :schema="schema" />
+
           </div>
         </div>
         <div class="column" role="main">
           <main class="content px-2 pt-2">
-            <ContentRenderer :value="content">
-              <h1>{{ content.title }}</h1>
-              <ChecklistMetadata
-                :status="schema.metadata.state"
-                :timestamp="schema.metadata.timestamp"/>
-              <ContentRendererMarkdown :value="content" />
-              <h1>Checklist Items</h1>
-            </ContentRenderer>
+            <h1>{{ content.title }}</h1>
+            <ChecklistMetadata :metadata="content.metadata" />
+            <!-- TODO: markdown rendering not working if md body is empty -->
+            <!-- <ContentDoc /> -->
 
-            <ClientOnly>
-              <section v-for="(category, catKey) in list" :key="catKey">
-                <!-- <pre><code>{{ category.title }}</code></pre> -->
-                <h1 class="is-size-4 py-3 px-5 has-text-weight-semibold has-text-white has-sticky-category-heading" >
-                  {{ category.title }}
-                </h1>
-                <ChecklistSubcategory v-for="(subcategory, subcatKey) in category.subcategories"
-                  :key="subcatKey"
-                  :subcategoryKey="subcatKey"
-                  :items="subcategory.items"
-                  :title="subcategory.title">
-                </ChecklistSubcategory>
-              </section>
-            </ClientOnly>
+            <h2>Checklist Items</h2>
+
+            <section v-for="category in schema.categories" :key="category._path">
+              <h1 class="is-size-4 py-3 px-5 has-text-weight-semibold has-text-white has-sticky-category-heading"
+              :id="anchorIdFromPath(category._path)">
+                {{ category.title }}
+              </h1>
+              <ChecklistSubcategoryV2 v-for="s in schema.subcategories.sortOrder[category._path]"
+                :key="s._path"
+                :title="s.title"
+                :content-path="s._path">
+              </ChecklistSubcategoryV2>
+            </section>
           </main>
         </div>
       </div>
@@ -85,11 +119,6 @@
 </template>
 
 <style lang="scss">
-  // body {
-  //   background: #f4f8fb;
-  //   background: var(--msft-off-white); //#f4f3f5; //#f4faff; //#fbfbfb;
-  // }
-
   [role="main"] {
     min-height: 600px;
   }
