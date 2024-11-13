@@ -95,7 +95,10 @@
             <h1>{{ content.title }}</h1>
             <ChecklistMetadata :metadata="content.metadata" />
             <!-- TODO: markdown rendering not working if md body is empty -->
-            <!-- <ContentDoc /> -->
+            <ContentDoc>
+              <template #empty>
+              </template>
+            </ContentDoc>
 
             <h2>Checklist Items</h2>
 
