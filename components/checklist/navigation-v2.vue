@@ -1,25 +1,30 @@
 <script setup>
-  const props = defineProps({
-    schema: {
-      type: Object,
-      required: false,
-      default: null
-    }
-  })
+const props = defineProps({
+  schema: {
+    type: Object,
+    required: true
+  }
+})
 </script>
 
 <template>
   <nav>
     <div class="categories mr-4">
-      <details v-for="(category, catKey) in props.schema">
+      <details v-for="category in props.schema.categories" :key="category._path">
         <summary class="py-2 pr-2">
           <span>
-            <NuxtLink :to="anchorLink(catKey)" class="has-text-weight-semibold has-text-primary-ter is-size-7">{{ category.title }}</NuxtLink>
+            <NuxtLink
+              :to="anchorLinkFromPath(category._path)"
+              class="has-text-weight-semibold has-text-primary-ter is-size-7">
+              {{ category.title }}
+            </NuxtLink>
           </span>
         </summary>
         <ul class="subcategories mt-2 mb-4">
-          <li v-for="(subcategory, subcatKey) in category.subcategories" class="mr-3 mb-2 is-size-7">
-            <NuxtLink :to="anchorLink(subcatKey)">{{ subcategory.title }}</NuxtLink>
+          <li v-for="subcategory in props.schema.subcategories.sortOrder[category._path]" :key="subcategory._path" class="mr-3 mb-2">
+            <NuxtLink :to="anchorLinkFromPath(subcategory._path)" class="is-size-7">
+              {{ subcategory.title }}
+            </NuxtLink>
           </li>
         </ul>
       </details>
