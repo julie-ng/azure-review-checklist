@@ -31,7 +31,8 @@ const props = defineProps({
     <div class="columns mx-1">
       <div class="column is-1" style="width: 5%">
         <label class="checkbox">
-          <input type="checkbox" @input="checked"
+          <input type="checkbox"
+            @input="checked"
             :id="formIdFromItem(props.item, 'checkbox')"
             :data-checklist-item-guid="props.item.guid"
             :data-checklist-item-id="props.item.id">

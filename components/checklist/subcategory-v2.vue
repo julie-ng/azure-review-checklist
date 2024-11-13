@@ -29,13 +29,12 @@ const { data: items } = await useAsyncData(asyncCacheKey, () => {
 
 <template>
   <section class="my-5 px-5 py-4">
-    <h1 :id="anchorIdFromPath(props.contentPath)" class="is-size-4 py-3 has-text-weight-bold has-msft-blue-color">{{ props.title }}</h1>
+    <h1 :id="anchorIdFromPath(props.contentPath)" class="is-size-4 py-3 has-text-weight-bold has-msft-blue-color">
+      {{ props.title }}
+    </h1>
     <ChecklistHeaderRow />
-    <!-- <p><code>{{ props.contentPath }}</code></p> -->
-
     <article v-for="item in items"
       :key="item._path"
-      :data-id="item.id"
       :data-severity="item.severity"
       :data-waf-pillar="item.waf"
     >

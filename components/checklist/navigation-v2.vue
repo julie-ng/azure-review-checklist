@@ -48,23 +48,7 @@ const props = defineProps({
     }
   }
 
-  // details {
-  // summary {
-  //   cursor: pointer;
-
-  //   & > * {
-  //     display: inline;
-  //     // margin-left: .25em;
-  //   }
-  // }
-
   details {
-    //  border-bottom: 1px solid #e0e0e0; //var(--msft-cool-grey);
-
-    //  &:last-child {
-    //   border-bottom: none;
-    //  }
-
      ul {
       border-left: 1px solid #ddd;
       margin-left: 1.5rem;
@@ -100,13 +84,7 @@ const props = defineProps({
   }
 
   details[open] > summary {
-    // list-style-type: '- ';
-    // OR
-
     &::before {
-      // display: inline-block;
-      // float: right;
-      // content: '–';
       transform: rotate(-270deg);
       margin-left: 4px;
     }
@@ -117,5 +95,4 @@ const props = defineProps({
       padding-top: 0 !important;
     }
   }
-
 </style>

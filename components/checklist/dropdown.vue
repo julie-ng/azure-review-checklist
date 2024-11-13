@@ -2,16 +2,6 @@
   const route = useRoute()
   const selectRef = ref(null)
 
-  // const { data: checklists } = await useAsyncData('checklist-nav', () => {
-  //   return queryContent('/checklists')
-  //     .where({
-  //       _file: { $ne: 'guide/index.md' },
-  //       _dir: { $eq: 'checklists'}, // fetch only 1 level
-  //     })
-  //     .only(['_path', 'title'])
-  //     .find()
-  // })
-
   const { data: checklists } = await useAsyncData(`checklists-nav`, () => {
     return queryContent('checklists')
       .without(['body'])
@@ -21,7 +11,6 @@
       })
       .find()
   })
-
 
   function isSelected(path) {
     return path === route.path
